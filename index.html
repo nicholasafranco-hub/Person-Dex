@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person-Dex</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Person-Dex</h1>
+    </header>
+
+    <section id="form-container">
+        <h2>Add a Person</h2>
+        <form id="person-form">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="photo" placeholder="Photo URL" required>
+            <input type="text" id="physical" placeholder="Physical Characteristics">
+            <input type="text" id="personality" placeholder="Personality Traits">
+            <button type="submit">Add Person</button>
+        </form>
+    </section>
+
+    <section id="person-list">
+        <h2>People in Your Person-Dex</h2>
+        <div id="cards-container"></div>
+    </section>
+
+    <!-- Detail view overlay -->
+    <div id="detail-overlay" class="hidden">
+        <button id="close-detail">X</button>
+        <div id="detail-content">
+            <h2 id="detail-name"></h2>
+            <p><strong>Physical:</strong> <span id="detail-physical"></span></p>
+            <p><strong>Personality:</strong> <span id="detail-personality"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
