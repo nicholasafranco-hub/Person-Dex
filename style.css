@@ -54,6 +54,7 @@ button {
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
+    margin-top: 5px;
 }
 
 button:hover {

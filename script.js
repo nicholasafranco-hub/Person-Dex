@@ -1,5 +1,6 @@
 const form = document.getElementById('person-form');
 const cardsContainer = document.getElementById('cards-container');
+const clearAllBtn = document.getElementById('clear-all');
 
 // Detail overlay elements
 const detailOverlay = document.getElementById('detail-overlay');
@@ -8,7 +9,11 @@ const detailPhysical = document.getElementById('detail-physical');
 const detailPersonality = document.getElementById('detail-personality');
 const closeDetail = document.getElementById('close-detail');
 
-let people = [];
+// Load people from localStorage or start empty
+let people = JSON.parse(localStorage.getItem('personDex')) || [];
+
+// Render saved people on page load
+people.forEach(person => addPersonCard(person));
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -22,6 +27,9 @@ form.addEventListener('submit', function(e) {
     const person = { name, photo, physical, personality };
     people.push(person);
 
+    // Save to localStorage
+    localStorage.setItem('personDex', JSON.stringify(people));
+
     addPersonCard(person);
 
     form.reset();
@@ -33,7 +41,7 @@ function addPersonCard(person) {
     card.classList.add('person-card');
     card.textContent = person.name;
 
-    // Click card to open detail overlay
+    // Click to open detail overlay
     card.addEventListener('click', () => {
         detailName.textContent = person.name;
         detailPhysical.textContent = person.physical;
@@ -45,7 +53,16 @@ function addPersonCard(person) {
     cardsContainer.appendChild(card);
 }
 
-// Close overlay when clicking X
+// Close overlay
 closeDetail.addEventListener('click', () => {
     detailOverlay.classList.add('hidden'); // Hide overlay
+});
+
+// Clear all saved people
+clearAllBtn.addEventListener('click', () => {
+    if (confirm("Are you sure you want to clear all people?")) {
+        people = [];
+        localStorage.removeItem('personDex');
+        cardsContainer.innerHTML = '';
+    }
 });
